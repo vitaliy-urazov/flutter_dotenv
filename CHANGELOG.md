@@ -7,13 +7,17 @@ Release notes are available on [github][notes].
 
 [pub-semver]: https://www.dartlang.org/tools/pub/versioning.html#semantic-versions
 [pub-semver-readme]: https://pub.dartlang.org/packages/pub_semver
-[notes]: https://github.com/mockturtl/dotenv/releases
+[notes]: https://github.com/java-james/flutter_dotenv/releases
+
+2.0.0
+-----
+
+- Flutter compatible
 
 1.0.0
 -----
 
 - Dart 2 compatible. [#16][]
-
 
 #### 0.1.3+3
 
@@ -65,12 +69,3 @@ Release notes are available on [github][notes].
 -----
 
 Initial release.
-
-[#3]: https://github.com/mockturtl/dotenv/issues/3
-[#5]: https://github.com/mockturtl/dotenv/issues/5
-[#6]: https://github.com/mockturtl/dotenv/issues/6
-[#7]: https://github.com/mockturtl/dotenv/issues/7
-[#8]: https://github.com/mockturtl/dotenv/issues/8
-[#10]: https://github.com/mockturtl/dotenv/issues/10
-[#11]: https://github.com/mockturtl/dotenv/issues/11
-[#16]: https://github.com/mockturtl/dotenv/issues/16

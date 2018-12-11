@@ -1,72 +1,57 @@
-dotenv
-======
+flutter_dotenv
+==============
 
-Load environment variables at runtime from a `.env` file.
-
-[![Pub Version][pub-badge]][pub]
-[![Build Status][ci-badge]][ci]
-[![Documentation][dartdocs-badge]][dartdocs]
-
-[ci-badge]: https://travis-ci.org/mockturtl/dotenv.svg?branch=master
-[ci]: https://travis-ci.org/mockturtl/dotenv
-[pub-badge]: https://img.shields.io/pub/v/dotenv.svg
-[pub]: https://pub.dartlang.org/packages/dotenv
-[dartdocs-badge]: https://img.shields.io/badge/dartdocs-reference-blue.svg
-[dartdocs]: http://www.dartdocs.org/documentation/dotenv/latest
+Load configuration at runtime from a `.env` file which can be used throughout the applicaiton.
 
 ### about
 
-Deploying applications should be simple.  This implies constraints:
+This library is a fork of [mockturtl/dotenv] dart library with slight changes to make this work with flutter.
+It parses the `.env` file into a map contained within a singleton which allows the variables to be used throughout your application.
 
-> **The [twelve-factor app][12fa] stores [config][cfg] in _environment variables_**
-> (often shortened to _env vars_ or _env_). Env vars are easy to change
-> between deploys without changing any code... they are a language- and 
-> OS-agnostic standard.
-
-[12fa]: http://www.12factor.net
-[cfg]: http://12factor.net/config
-
-An _environment_ is the set of variables known to a process (say, `PATH`, `PORT`, ...).
-It is desirable to mimic the production environment during development (testing,
-staging, ...) by reading these values from a file.
-
-This library parses that file and merges its values with the built-in 
-[`Platform.environment`][docs-io] map.
-
-[docs-io]: https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart:io.Platform#id_environment
+[mockturtl/dotenv]: https://pub.dartlang.org/packages/dotenv
 
 ### usage
 
-See [documentation][usage] and [examples][].
-
-[usage]: http://www.dartdocs.org/documentation/dotenv/latest/index.html#dotenv/dotenv
-[examples]: https://github.com/mockturtl/dotenv/tree/master/example
-
-### cli
-
-Get the latest:
+Create a `.env` file in the root of your project with the example content:
 
 ```sh
-$ pub global activate dotenv
+VAR_NAME=HELLOWORLD
 ```
 
-Run:
+Add the `.env` file to your assets bundle in `pubspec.yaml`
 
-```sh
-$ pub global run dotenv:new  # create a .env file and add it to .gitignore
-$ pub global run dotenv      # load the file and print the environment to stdout
+  ```
+  assets:
+  - .env
+  ```
+
+Init the DotEnv singleton in `main.dart`
 ```
+Future main() async {
+  await DotEnv().load('.env');
+  //...runapp
+}
+```
+
+Access variables from `.env` throughout the applicaiton
+```
+DotEnv().env['VAR_NAME'];
+```
+
+Optionally you could map `DotEnv().env` after load to a config model to access config with types.
 
 #### discussion
 
 Use the [issue tracker][tracker] for bug reports and feature requests.
 
-Pull requests gleefully considered.
+Pull requests are welcome.
 
-[tracker]: https://github.com/mockturtl/dotenv/issues
+[tracker]: https://github.com/java-james/flutter_dotenv/issues
 
 ###### prior art
 
+[flutter_dotenv]: https://pub.dartlang.org/packages/dotenv
+- [mockturtl/dotenv][] (dart)
 - [bkeepers/dotenv][] (ruby)
 - [motdotla/dotenv][] (node)
 - [theskumar/python-dotenv][] (python)
@@ -77,6 +62,7 @@ Pull requests gleefully considered.
 - [mefellows/sbt-dotenv][] (scala)
 - [greenspun/dotenv][] (half of common lisp)
 
+[mockturtl/dotenv]: https://pub.dartlang.org/packages/dotenv
 [bkeepers/dotenv]: https://github.com/bkeepers/dotenv
 [motdotla/dotenv]: https://github.com/motdotla/dotenv
 [theskumar/python-dotenv]: https://github.com/theskumar/python-dotenv

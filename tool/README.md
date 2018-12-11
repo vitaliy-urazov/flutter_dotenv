@@ -17,10 +17,6 @@ Runs the official [code formatter][].
 $ pub global activate dart_style
 ```
 
-### [test.sh](test.sh)
-
-Runs the unit test suite.
-
 ### [docs.sh](docs.sh)
 
 Preview [dartdoc][] documentation.
@@ -32,10 +28,6 @@ Preview [dartdoc][] documentation.
 ```sh
 $ pub global activate dartdoc
 ```
-
-### [travis.sh](travis.sh)
-
-Run the analyzer and unit tests on Travis CI.
 
 ### [release.sh](release.sh)
 
