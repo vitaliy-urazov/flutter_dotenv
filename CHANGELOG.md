@@ -9,6 +9,11 @@ Release notes are available on [github][notes].
 [pub-semver-readme]: https://pub.dartlang.org/packages/pub_semver
 [notes]: https://github.com/java-james/flutter_dotenv/releases
 
+#### 2.0.1
+
+- [docs] tweak app description
+- [fix] increase meta version range
+
 2.0.0
 -----
 
