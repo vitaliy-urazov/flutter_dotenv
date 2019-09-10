@@ -9,6 +9,10 @@ Release notes are available on [github][notes].
 [pub-semver-readme]: https://pub.dartlang.org/packages/pub_semver
 [notes]: https://github.com/java-james/flutter_dotenv/releases
 
+#### 2.0.3
+
+- [fix] Warning when using with flutter_test
+
 #### 2.0.2
 
 - [fix] Flutter 1.9.5 compatibility ensure binding was initialized  
