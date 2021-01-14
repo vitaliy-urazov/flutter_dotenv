@@ -13,8 +13,8 @@ Load configuration at runtime from a `.env` file which can be used throughout th
 > between deploys without changing any code... they are a language- and
 > OS-agnostic standard.
 
-[12fa]: http://www.12factor.net
-[cfg]: http://12factor.net/config
+[12fa]: https://www.12factor.net
+[cfg]: https://12factor.net/config
 
 ## About
 

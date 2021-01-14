@@ -11,6 +11,10 @@ Release notes are available on [github][notes].
 
 #### 3.0.0
 
+- [docs] Use secure links
+
+#### 3.0.0
+
 - [new] Merge with Platform.Environment
 - [new] Throw precise errors
 - [new] Access via functions
