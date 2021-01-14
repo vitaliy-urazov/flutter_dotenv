@@ -1,14 +1,35 @@
 flutter_dotenv
 ==============
 
-Load configuration at runtime from a `.env` file which can be used throughout the applicaiton.
+[![Pub Version][pub-badge]][pub]
+
+[pub]: https://pub.dartlang.org/packages/flutter_dotenv
+[pub-badge]: https://img.shields.io/pub/v/flutter_dotenv.svg
+
+Load configuration at runtime from a `.env` file which can be used throughout the application.
+
+> **The [twelve-factor app][12fa] stores [config][cfg] in _environment variables_**
+> (often shortened to _env vars_ or _env_). Env vars are easy to change
+> between deploys without changing any code... they are a language- and
+> OS-agnostic standard.
+
+[12fa]: http://www.12factor.net
+[cfg]: http://12factor.net/config
 
 ## About
 
-This library is a fork of [mockturtl/dotenv] dart library with slight changes to make this work with flutter.
-It parses the `.env` file into a map contained within a singleton which allows the variables to be used throughout your application.
+This library is a fork of [mockturtl/dotenv] dart library, initially with slight changes to make it work with flutter.
 
 [mockturtl/dotenv]: https://pub.dartlang.org/packages/dotenv
+
+An _environment_ is the set of variables known to a process (say, `PATH`, `PORT`, ...).
+It is desirable to mimic the production environment during development (testing,
+staging, ...) by reading these values from a file.
+
+This library parses that file and merges its values with the built-in
+[`Platform.environment`][docs-io] map.
+
+[docs-io]: https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart:io.Platform#id_environment
 
 ### Usage
 
@@ -25,28 +46,33 @@ Add the `.env` file to your assets bundle in `pubspec.yaml`
     - .env
 ```
 
-Add the `.env` file as an entry in your `.gitignore` if it isn't already
+Optionally add the `.env` file as an entry in your `.gitignore` if it isn't already
 
 ```sh
 .env*
 ```
 
-Init the DotEnv singleton in `main.dart`
+Load the .env file in `main.dart`
 
 ```dart
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
+
 Future main() async {
-  await DotEnv().load('.env');
+  // NOTE: The filename will default to .env and doesn't need to be defined in this case
+  await DotEnv.load(fileName: ".env");
   //...runapp
 }
 ```
 
-Access variables from `.env` throughout the applicaiton
+You can then access variables from `.env` throughout the application
 
 ```dart
-DotEnv().env['VAR_NAME'];
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+env['VAR_NAME'];
 ```
 
-Optionally you could map `DotEnv().env` after load to a config model to access config with types.
+Optionally you could map `env` after load to a config model to access a config with types.
 
 #### Discussion
 
