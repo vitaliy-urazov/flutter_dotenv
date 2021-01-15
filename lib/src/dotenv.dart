@@ -1,7 +1,5 @@
-
 import 'dart:async';
 import 'dart:io';
-
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -36,17 +34,21 @@ var _envMap = Map<String, String>.from(Platform.environment);
 
 /// A copy of [Platform.environment](dart:io) including variables loaded at runtime from a file.
 Map<String, String> get env {
-  if(!_isInitialized) {
+  if (!_isInitialized) {
     throw NotInitializedError();
   }
   return _envMap;
 }
 
 /// Clear [env] and optionally overwrite with a new writable copy of [Platform.environment](dart:io).
-Map clean({ bool retainPlatformEnvironment = true}) => _envMap = Map.from(retainPlatformEnvironment ? Platform.environment : {});
+Map clean({bool retainPlatformEnvironment = true}) =>
+    _envMap = Map.from(retainPlatformEnvironment ? Platform.environment : {});
 
 /// Loads environment variables from the env file into a map
-Future load({String fileName = '.env', Parser parser = const Parser(), bool includePlatformEnvironment = true}) async {
+Future load(
+    {String fileName = '.env',
+    Parser parser = const Parser(),
+    bool includePlatformEnvironment = true}) async {
   clean(retainPlatformEnvironment: includePlatformEnvironment);
   final allLines = await _getEntriesFromFile(fileName);
   final envEntries = parser.parse(allLines);
@@ -59,7 +61,6 @@ Future load({String fileName = '.env', Parser parser = const Parser(), bool incl
 /// Note [load] should be called first.
 bool isEveryDefined(Iterable<String> vars) =>
     vars.every((k) => _envMap[k] != null && _envMap[k].isNotEmpty);
-
 
 Future<List<String>> _getEntriesFromFile(String filename) async {
   try {

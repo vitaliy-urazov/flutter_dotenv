@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:meta/meta.dart';
+
 /// Creates key-value pairs from strings formatted as environment
 /// variable definitions.
 class Parser {
