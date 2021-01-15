@@ -29,8 +29,8 @@ import 'errors.dart';
 ///     const _requiredEnvVars = const ['host', 'port'];
 ///     bool get hasEnv => isEveryDefined(_requiredEnvVars);
 ///
-var _isInitialized = false;
-var _envMap = Map<String, String>.from(Platform.environment);
+bool _isInitialized = false;
+Map<String, String> _envMap = {};
 
 /// A copy of [Platform.environment](dart:io) including variables loaded at runtime from a file.
 Map<String, String> get env {

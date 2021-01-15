@@ -9,6 +9,10 @@ Release notes are available on [github][notes].
 [pub-semver-readme]: https://pub.dartlang.org/packages/pub_semver
 [notes]: https://github.com/java-james/flutter_dotenv/releases
 
+#### 3.0.2
+
+- [chore] Format code with dart fmt
+
 #### 3.0.1
 
 - [docs] Use secure links
