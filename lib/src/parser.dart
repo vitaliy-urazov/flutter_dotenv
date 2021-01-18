@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:meta/meta.dart';
 
 /// Creates key-value pairs from strings formatted as environment
@@ -15,7 +13,7 @@ class Parser {
   /// [Parser] methods are pure functions.
   const Parser();
 
-  /// Creates a [Map](dart:core) suitable for merging into [Platform.environment](dart:io).
+  /// Creates a [Map](dart:core).
   /// Duplicate keys are silently discarded.
   Map<String, String> parse(Iterable<String> lines) {
     var out = <String, String>{};
@@ -47,7 +45,8 @@ class Parser {
       return {k: v};
     }
 
-    return {k: interpolate(v, env)};
+    final interpolatedValue = interpolate(v, env);
+    return {k: interpolatedValue};
   }
 
   /// Substitutes $bash_vars in [val] with values from [env].
@@ -55,7 +54,7 @@ class Parser {
   String interpolate(String val, Map<String, String> env) =>
       val.replaceAllMapped(_bashVar, (m) {
         var k = m.group(2);
-        if (!_has(env, k)) return _tryPlatformEnv(k);
+        if (!_has(env, k)) return '';
         return env[k];
       });
 
@@ -85,9 +84,4 @@ class Parser {
   /// [null] is a valid value in a Dart map, but the env var representation is empty string, not the string 'null'
   bool _has(Map<String, String> map, String key) =>
       map.containsKey(key) && map[key] != null;
-
-  String _tryPlatformEnv(String key) {
-    if (!_has(Platform.environment, key)) return '';
-    return Platform.environment[key];
-  }
 }

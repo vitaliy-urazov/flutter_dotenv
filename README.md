@@ -16,7 +16,7 @@ Load configuration at runtime from a `.env` file which can be used throughout th
 [12fa]: https://www.12factor.net
 [cfg]: https://12factor.net/config
 
-## About
+# About
 
 This library is a fork of [mockturtl/dotenv] dart library, initially with slight changes to make it work with flutter.
 
@@ -31,12 +31,15 @@ This library parses that file and merges its values with the built-in
 
 [docs-io]: https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart:io.Platform#id_environment
 
-### Usage
+# Usage
 
 Create a `.env` file in the root of your project with the example content:
 
 ```sh
-VAR_NAME=HELLOWORLD
+FOO=foo
+BAR=bar
+FOOBAR=$FOO$BAR
+ESCAPED_DOLLAR_SIGN='$1000'
 ```
 
 Add the `.env` file to your assets bundle in `pubspec.yaml`
@@ -52,7 +55,7 @@ Optionally add the `.env` file as an entry in your `.gitignore` if it isn't alre
 .env*
 ```
 
-Load the .env file in `main.dart`
+Load the `.env` file in `main.dart`
 
 ```dart
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
@@ -74,7 +77,55 @@ env['VAR_NAME'];
 
 Optionally you could map `env` after load to a config model to access a config with types.
 
-#### Discussion
+# Advanced usage
+
+## Referencing
+
+You can reference variables defined above other within  `.env`:
+
+```
+  FOO=foo
+  BAR=bar
+  FOOBAR=$FOO$BAR
+```
+
+You can escape referencing by wrapping the value in single quotes:
+
+```dart
+ESCAPED_DOLLAR_SIGN='$1000'
+```
+
+## Merging
+
+You can merge a map into the environment on load:
+
+```dart
+  await DotEnv.load(mergeWith: { "FOO": "foo", "BAR": "bar"});
+```
+
+You can also reference these merged variables within `.env`:
+
+```
+  FOOBAR=$FOO$BAR
+```
+
+## Usage with Platform Environment
+
+The Platform.environment map can be merged into the env:
+
+```dart
+  // For example using Platform.environment that contains a CLIENT_ID entry
+  await DotEnv.load(mergeWith: Platform.environment);
+  print(env["CLIENT_ID"]);
+```
+
+Like other merged entries described above, `.env` entries can reference these merged Platform.Environment entries if required:
+
+```
+  CLIENT_URL=https://$CLIENT_ID.dev.domain.com
+```
+
+# Discussion
 
 Use the [issue tracker][tracker] for bug reports and feature requests.
 
@@ -82,7 +133,7 @@ Pull requests are welcome.
 
 [tracker]: https://github.com/java-james/flutter_dotenv/issues
 
-###### Prior art
+# Prior art
 
 [flutter_dotenv]: https://pub.dartlang.org/packages/dotenv
 - [mockturtl/dotenv][] (dart)
@@ -108,4 +159,4 @@ Pull requests are welcome.
 [mefellows/sbt-dotenv]: https://github.com/mefellows/sbt-dotenv
 [greenspun/dotenv]: https://www.youtube.com/watch?v=pUjJU8Bbn3g
 
-###### license: [MIT](LICENSE)
+# license: [MIT](LICENSE)

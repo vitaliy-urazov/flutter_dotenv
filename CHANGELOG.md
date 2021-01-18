@@ -9,6 +9,10 @@ Release notes are available on [github][notes].
 [pub-semver-readme]: https://pub.dartlang.org/packages/pub_semver
 [notes]: https://github.com/java-james/flutter_dotenv/releases
 
+#### 3.1.0
+
+- [new] Allow merging with a custom map on load
+
 #### 3.0.2
 
 - [chore] Format code with dart fmt
