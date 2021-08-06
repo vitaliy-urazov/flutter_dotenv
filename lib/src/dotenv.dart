@@ -53,7 +53,7 @@ class DotEnv {
   /// Merge with any entries defined in [mergeWith]
   Future<void> load(
       {String fileName = '.env', Parser parser = const Parser(), Map<String, String> mergeWith = const {}}) async {
-    clean();
+
     final linesFromFile = await _getEntriesFromFile(fileName);
     final linesFromMergeWith = mergeWith.entries.map((entry) => "${entry.key}=${entry.value}").toList();
     final allLines = linesFromMergeWith..addAll(linesFromFile);
