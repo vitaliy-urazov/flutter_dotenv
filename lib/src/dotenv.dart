@@ -31,6 +31,7 @@ import 'parser.dart';
 ///
 
 DotEnv dotenv = DotEnv();
+Map<String, String> env = dotenv.env;
 
 class DotEnv {
   bool _isInitialized = false;
